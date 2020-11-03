@@ -42,7 +42,10 @@ const user = {
 	const armorRe = /^(?:.*\n)?(-----BEGIN PGP SIGNED MESSAGE-----\s*\n(?:Hash:\s+[^\n]*\n)?(?:\s*\n)*)\n[^]*\n(-----BEGIN PGP SIGNATURE-----\s*\n[^]*-----END PGP SIGNATURE-----\s*)(\n.*)?$/;
 	const [, head, signature] = cleartext.match(armorRe);
 
-	const [heading, trailing] = message.text.split(/\r?\n\r?\n/, 2);
+	console.log(message.text.split(/\r?\n\r?\n/, 2));
+	const parts = message.text.split(/\r?\n\r?\n/);
+	const heading = parts[0];
+	const trailing = parts.slice(1).join("\n\n");
 	const headingMasked = heading.replace(/(?<=\[[^\]]*)[^\]]/g, '○').replaceAll(/\[|]/g, '');
 	const headingHTML = heading.replaceAll(/\[([^\]]*)(]|$)/g, (_, s, closing) => {
 		if (closing) {
@@ -50,7 +53,7 @@ const user = {
 		}
 		return `<span class="mask"><span class="bracket">[</span>${s}</span>`;
 	});
-	const text = trailing ? `${headingHTML}\n<hr />${trailing}` : `${heading}`;
+	const text = trailing ? `${headingHTML}\n<hr />${trailing}` : `${headingHTML}`;
 
 	function dateToString(d) {
 		function pad(n) {
