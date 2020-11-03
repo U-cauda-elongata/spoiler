@@ -50,7 +50,7 @@ const user = {
 		}
 		return `<span class="mask"><span class="bracket">[</span>${s}</span>`;
 	});
-	const text = trailing ? `${headingHTML}\n<hr />${trailing}` : `<p>${heading}</p>`;
+	const text = trailing ? `${headingHTML}\n<hr />${trailing}` : `${heading}`;
 
 	function dateToString(d) {
 		function pad(n) {
