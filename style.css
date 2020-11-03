@@ -1,0 +1,101 @@
+html {
+    font-family: 'Helvetica Neue', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', sans-serif;
+}
+code {
+    font-family: 'Source Code Pro', 'Menlo', 'Monaco', 'Courier New', monospace;
+}
+h1 {
+    font-size: large;
+}
+p {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.box {
+    margin: auto;
+    margin-bottom: 13px;
+    width: 600px;
+    max-width: 90%;
+    min-width: 400px;
+    border: solid 2px #CCC;
+    padding: 13px;
+}
+.box > p:first-child {
+    margin-top: auto;
+}
+.box > p:last-child {
+    margin-bottom: auto;
+}
+.box > h1:first-child {
+    margin-top: auto;
+}
+
+.post header::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.post header .profile-image {
+    float: left;
+}
+.post header .timestamp {
+    float: right;
+}
+
+.author-link {
+    color: #000;
+    text-decoration: none;
+}
+.profile-image {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+}
+.name {
+    font-weight: bold;
+}
+.screenname {
+    color: #657786;
+}
+
+.armor aside {
+    font-size: x-small;
+    display: inline;
+}
+.armor aside, .bracket {
+    color: #BBB;
+}
+.armor-text {
+    white-space: pre-wrap;
+}
+.mask {
+    background: #AFA;
+}
+
+.cloak {
+    display: none;
+}
+
+.fingerprint span:first-child {
+    padding-left: 0;
+}
+.fingerprint span {
+    padding-left: 5px;
+}
+
+.scroll-box {
+    height: 200px;
+    overflow: auto;
+    background-color: #DDD;
+    padding-left: 13px;
+    padding-right: 13px;
+}
+
+.public-key {
+    font-size: small;
+}
+
+.button {
+    font-size: large;
+}
