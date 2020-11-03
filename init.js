@@ -43,13 +43,14 @@ const user = {
 	const [, head, signature] = cleartext.match(armorRe);
 
 	const [heading, trailing] = message.text.split(/\r?\n\r?\n/, 2);
-	const heading2 = heading.replaceAll(/\[([^\]]*)(]|$)/g, (_, s, closing) => {
+	const headingMasked = heading.replace(/(?<=\[[^\]]*)[^\]]/g, '○').replaceAll(/\[|]/g, '');
+	const headingHTML = heading.replaceAll(/\[([^\]]*)(]|$)/g, (_, s, closing) => {
 		if (closing) {
 			s += '<span class="bracket">]</span>';
 		}
 		return `<span class="mask"><span class="bracket">[</span>${s}</span>`;
 	});
-	const text = trailing ? `${heading2}\n<hr />${trailing}` : `<p>${heading}</p>`;
+	const text = trailing ? `${headingHTML}\n<hr />${trailing}` : `<p>${heading}</p>`;
 
 	function dateToString(d) {
 		function pad(n) {
@@ -58,7 +59,7 @@ const user = {
 		return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 	}
 
-	document.title += `: "${heading}"`;
+	document.title += `: "${headingMasked}"`;
 
 	document.getElementsByClassName('author-link')[0].href = `https://twitter.com/${user.screenname}`;
 	document.getElementsByClassName('profile-image')[0].src = user.profile_image;
