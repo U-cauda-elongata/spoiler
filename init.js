@@ -58,6 +58,8 @@ const user = {
 		return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 	}
 
+	document.title += `: "${heading}"`;
+
 	document.getElementsByClassName('author-link')[0].href = `https://twitter.com/${user.screenname}`;
 	document.getElementsByClassName('profile-image')[0].src = user.profile_image;
 	document.getElementsByClassName('name')[0].innerText = user.name;
