@@ -45,7 +45,6 @@ const user = {
 	const parts = message.text.split(/\r?\n\r?\n/);
 	const heading = parts[0];
 	const trailing = parts.slice(1).join("\n\n");
-	const headingMasked = heading.replace(/(?<=\[[^\]]*)[^\]]/g, '○').replaceAll(/\[|]/g, '');
 	const headingHTML = heading.replaceAll(/\[([^\]]*)(]|$)/g, (_, s, closing) => {
 		if (closing) {
 			s += '<span class="bracket">]</span>';
@@ -61,7 +60,14 @@ const user = {
 		return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 	}
 
-	document.title += `: "${headingMasked}"`;
+	try {
+		// Lookbehind match is not available in some UAs (e.g., Safari, at the time of writing).
+		const reMask = new RegExp('(?<=\\[[^\\]]*)[^\\]]', 'g');
+		const headingMasked = heading.replace(reMask, '○').replaceAll(/\[|]/g, '');
+		document.title += `: "${headingMasked}"`;
+	} catch {
+		// noop
+	}
 
 	document.getElementsByClassName('author-link')[0].href = `https://twitter.com/${user.screenname}`;
 	document.getElementsByClassName('profile-image')[0].src = user.profile_image;
