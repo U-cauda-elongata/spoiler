@@ -53,6 +53,10 @@ const user = {
 	});
 	const text = trailing ? `${headingHTML}\n<hr />${trailing}` : `${headingHTML}`;
 
+	document.getElementsByClassName('armor-copy-button')[0].addEventListener('click', () => {
+		navigator.clipboard.writeText(cleartext);
+	});
+
 	function dateToString(d) {
 		function pad(n) {
 			return String(n).padStart(2, '0');
