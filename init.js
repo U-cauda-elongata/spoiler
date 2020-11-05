@@ -123,8 +123,12 @@ const user = {
 		name.innerText = user.name;
 		screennameText.innerHTML = user.screenname;
 		searchLink.href = `https://twitter.com/hashtag/spoiler+from:${user.screenname}?f=live`;
-		timestamp.innerHTML = dateToString(created);
-		timestamp.setAttribute('datetime', created.toISOString());
+
+		const time = document.createElement('time');
+		time.innerHTML = dateToString(created);
+		time.setAttribute('datetime', created.toISOString());
+		timestamp.appendChild(time);
+
 		armorHead.innerHTML = head;
 		armorText.innerHTML = text;
 		armorSignature.innerHTML = signature;
