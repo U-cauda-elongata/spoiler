@@ -7,6 +7,19 @@ const user = {
 (async () => {
 	'use strict';
 
+	openpgp.config.show_comment = openpgp.config.show_version = false;
+
+	function armorParts(cleartext) {
+		const armorRe = /^(-----BEGIN PGP SIGNED MESSAGE-----\s*\n(?:Hash:\s+[^\n]*\n)?(?:\s*\n)*)\s*\n[^]*\n(-----BEGIN PGP SIGNATURE-----\s*\n[^]*-----END PGP SIGNATURE-----\s*)\n?$/;
+		return cleartext.match(armorRe)?.slice(1);
+	}
+
+	function atobu8(input) {
+		return fetch('data:application/octet-stream;base64,' + input)
+			.then(res => res.arrayBuffer())
+			.then(buf => new Uint8Array(buf));
+	}
+
 	Array.prototype.forEach.apply(document.querySelectorAll('[data-copy]'), [elt => {
 		const target = elt.dataset.copy;
 		elt.addEventListener('click', () => {
@@ -71,21 +84,38 @@ const user = {
 	const publicKeys = (await openpgp.key.readArmored(pubKey)).keys;
 
 	async function initInner() {
-		const hash = location.hash;
+		const hash = location.hash?.slice(1);
 		if (!hash) {
 			throw '本文が指定されていません。';
 		}
 
-		cleartext = decodeURIComponent(hash.slice(1));
-		const armorRe = /^(?:.*\n)?(-----BEGIN PGP SIGNED MESSAGE-----\s*\n(?:Hash:\s+[^\n]*\n)?(?:\s*\n)*)\n[^]*\n(-----BEGIN PGP SIGNATURE-----\s*\n[^]*-----END PGP SIGNATURE-----\s*)(\n.*)?$/;
-		const [, head, signature] = cleartext.match(armorRe);
+		let message;
+		block: {
+			if (hash[0] == '-') {
+				const armored = decodeURIComponent(hash.slice(1));
+				try {
+					message = await openpgp.cleartext.readArmored(armored);
+				} catch {
+					break block;
+				}
+			} else {
+				try {
+					message = (await openpgp.message.read(await atobu8(hash))).unwrapCompressed();
+				} catch {
+					break block;
+				}
+			}
+		}
+		if (!message) {
+			throw '本文の書式が不正です。';
+		}
 
-		const message = await openpgp.cleartext.readArmored(cleartext);
-		let created;
-		let verified;
+		let signature, created, text, verified;
 		try {
-			created = message.signature.packets[0].created;
 			const results = (await message.verify(publicKeys)).map(({ verified }) => verified);
+			signature = (message.signature || message).packets.findPacket(openpgp.enums.packet.signature);
+			created = signature.created;
+			text = await openpgp.stream.readToEnd(message.getText());
 			verified = (await Promise.all(results)).every(x => x);
 		} catch (e) {
 			console.log(e);
@@ -95,7 +125,14 @@ const user = {
 			throw '署名が不正です。';
 		}
 
-		const parts = message.text.split(/\r?\n\r?\n/);
+		cleartext = (await openpgp.stream.readToEnd(openpgp.armor.encode(openpgp.enums.armor.signed, {
+			hash: openpgp.enums.read(openpgp.enums.hash, signature.hashAlgorithm).toUpperCase(),
+			text,
+			data: message.signature?.packets?.write() || signature.signature,
+		}))).trim();
+		const [head, tail] = armorParts(cleartext);
+
+		const parts = text.split(/\r?\n\r?\n/);
 		const heading = parts[0];
 		const trailing = parts.slice(1).join("\n\n");
 		const headingHTML = heading.replaceAll(/\[([^\]]*)(]|$)/g, (_, s, closing) => {
@@ -104,7 +141,7 @@ const user = {
 			}
 			return `<span class="mask"><span class="bracket">[</span>${s}</span>`;
 		});
-		const text = trailing ? `${headingHTML}\n<hr />${trailing}` : `${headingHTML}`;
+		const rendered = trailing ? `${headingHTML}\n<hr />${trailing}` : `${headingHTML}`;
 
 		function dateToString(d) {
 			function pad(n) {
@@ -130,8 +167,8 @@ const user = {
 		timestamp.appendChild(time);
 
 		armorHead.innerHTML = head;
-		armorText.innerHTML = text;
-		armorSignature.innerHTML = signature;
+		armorText.innerHTML = rendered;
+		armorSignature.innerHTML = tail;
 	}
 
 	function init() {
