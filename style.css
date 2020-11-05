@@ -1,6 +1,15 @@
 html {
     font-family: 'Helvetica Neue', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', sans-serif;
 }
+@media (prefers-color-scheme: dark) {
+    html {
+        background-color: #000;
+        color: #FFF;
+    }
+}
+a {
+    color: #17BF63;
+}
 code {
     font-family: 'Source Code Pro', 'Menlo', 'Monaco', 'Courier New', monospace;
 }
@@ -18,8 +27,13 @@ p {
     width: 600px;
     max-width: 90%;
     min-width: 400px;
-    border: solid 2px #CCC;
+    border: solid 1px #E6ECF0;
     padding: 13px;
+}
+@media (prefers-color-scheme: dark) {
+    .box {
+        border-color: #2F3336;
+    }
 }
 .box > p:first-child {
     margin-top: auto;
@@ -29,6 +43,19 @@ p {
 }
 .box > h1:first-child {
     margin-top: auto;
+}
+.box hr {
+    margin-top: 13px;
+    margin-bottom: 13px;
+    margin-left: -13px;
+    width: calc(100% + 26px);
+    border: none;
+    border-top: solid 1px #E6ECF0;
+}
+@media (prefers-color-scheme: dark) {
+    .box hr {
+        border-top-color: #2F3336;
+    }
 }
 
 .post header::after {
@@ -47,6 +74,11 @@ p {
     color: #000;
     text-decoration: none;
 }
+@media (prefers-color-scheme: dark) {
+    .author-link {
+        color: #FFF;
+    }
+}
 .profile-image {
     width: 43px;
     height: 43px;
@@ -58,6 +90,11 @@ p {
 .screenname {
     color: #657786;
 }
+@media (prefers-color-scheme: dark) {
+    .screenname {
+        color: #6E767D;
+    }
+}
 
 .armor aside {
     font-size: x-small;
@@ -66,11 +103,21 @@ p {
 .armor aside, .bracket {
     color: #BBB;
 }
+@media (prefers-color-scheme: dark) {
+    .armor aside, .bracket {
+        color: #444;
+    }
+}
 .armor-text {
     white-space: pre-wrap;
 }
 .mask {
     background: #AFA;
+}
+@media (prefers-color-scheme: dark) {
+    .mask {
+        background: #050;
+    }
 }
 
 .cloak {
@@ -90,6 +137,11 @@ p {
     background-color: #DDD;
     padding-left: 13px;
     padding-right: 13px;
+}
+@media (prefers-color-scheme: dark) {
+    .scroll-box {
+        background-color: #222;
+    }
 }
 
 .public-key {
