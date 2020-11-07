@@ -7,7 +7,7 @@ html {
         color: #FFF;
     }
 }
-a {
+:any-link {
     color: #17BF63;
 }
 code {
