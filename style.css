@@ -1,10 +1,26 @@
-html {
+:root {
     font-family: 'Helvetica Neue', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', sans-serif;
+    background-color: var(--background-color);
+    color: var(--color);
+    --background-color: #FFF;
+    --color: #000;
+    --scroll-box-background-color: #DDD;
+    --box-border-color: #E6ECF0;
+    --screenname-color: #657786;
+    --complementary-color: #BBB;
+    --mask-color: #AFA;
+    --footer-color: #777;
 }
 @media (prefers-color-scheme: dark) {
-    html {
-        background-color: #000;
-        color: #FFF;
+    :root {
+        --background-color: #000;
+        --color: #FFF;
+        --scroll-box-background-color: #222;
+        --box-border-color: #2F3336;
+        --screenname-color: #6E767D;
+        --complementary-color: #444;
+        --mask-color: #050;
+        --footer-color: #888;
     }
 }
 :any-link {
@@ -27,13 +43,8 @@ p {
     width: 600px;
     max-width: 90%;
     min-width: 400px;
-    border: solid 1px #E6ECF0;
+    border: solid 1px var(--box-border-color);
     padding: 13px;
-}
-@media (prefers-color-scheme: dark) {
-    .box {
-        border-color: #2F3336;
-    }
 }
 .box > p:first-child {
     margin-top: auto;
@@ -50,12 +61,7 @@ p {
     margin-left: -13px;
     width: calc(100% + 26px);
     border: none;
-    border-top: solid 1px #E6ECF0;
-}
-@media (prefers-color-scheme: dark) {
-    .box hr {
-        border-top-color: #2F3336;
-    }
+    border-top: solid 1px var(--box-border-color);
 }
 
 .post header::after {
@@ -71,13 +77,8 @@ p {
 }
 
 .author-link {
-    color: #000;
+    color: var(--color);
     text-decoration: none;
-}
-@media (prefers-color-scheme: dark) {
-    .author-link {
-        color: #FFF;
-    }
 }
 .profile-image {
     width: 43px;
@@ -89,12 +90,7 @@ p {
     font-weight: bold;
 }
 .screenname {
-    color: #657786;
-}
-@media (prefers-color-scheme: dark) {
-    .screenname {
-        color: #6E767D;
-    }
+    color: var(--screenname-color);
 }
 
 .armor aside {
@@ -102,23 +98,13 @@ p {
     display: inline;
 }
 .armor aside, .bracket {
-    color: #BBB;
-}
-@media (prefers-color-scheme: dark) {
-    .armor aside, .bracket {
-        color: #444;
-    }
+    color: var(--complementary-color);
 }
 .armor-text {
     white-space: pre-wrap;
 }
 .mask {
-    background: #AFA;
-}
-@media (prefers-color-scheme: dark) {
-    .mask {
-        background: #050;
-    }
+    background: var(--mask-color);
 }
 
 .fingerprint span:first-child {
@@ -131,14 +117,9 @@ p {
 .scroll-box {
     height: 200px;
     overflow: auto;
-    background-color: #DDD;
+    background-color: var(--scroll-box-background-color);
     padding-left: 13px;
     padding-right: 13px;
-}
-@media (prefers-color-scheme: dark) {
-    .scroll-box {
-        background-color: #222;
-    }
 }
 
 .public-key {
@@ -150,16 +131,15 @@ p {
 }
 
 .footer {
-    border-top: solid 1px #E6ECF0;
+    border-top: solid 1px var(--box-border-color);
     margin-top: 26px;
     padding-top: 13px;
     display: block;
-    background-color: #FFF;
     text-align: center;
 }
 
 .footer, .footer a {
-    color: #777;
+    color: var(--footer-color);
 }
 
 .icon {
