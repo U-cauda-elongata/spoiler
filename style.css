@@ -121,10 +121,6 @@ p {
     }
 }
 
-.cloak {
-    display: none;
-}
-
 .fingerprint span:first-child {
     padding-left: 0;
 }

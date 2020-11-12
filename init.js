@@ -54,8 +54,8 @@ const user = {
 		authorLink.removeAttribute('href');
 		searchLink.removeAttribute('href');
 		timestamp.removeAttribute('datetime');
-		errorContainer.classList.add('cloak');
-		main.classList.remove('cloak');
+		errorContainer.toggleAttribute('hidden', true);
+		main.toggleAttribute('hidden', false);
 	}
 
 	// Manually compile the `RegExp` in advance, since lookbehind match is not available
@@ -139,8 +139,8 @@ const user = {
 			.catch(e => {
 				cleartext = null;
 				errorMessage.innerText = e;
-				main.classList.add('cloak');
-				errorContainer.classList.remove('cloak');
+				main.toggleAttribute('hidden', true);
+				errorContainer.toggleAttribute('hidden', false);
 				if (typeof(e) != 'string') {
 					throw e;
 				}
