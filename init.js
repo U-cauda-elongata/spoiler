@@ -1,7 +1,7 @@
 const user = {
 	name: 'オナガグマ',
 	screenname: 'U_caudaElongata',
-	profile_image: 'https://pbs.twimg.com/profile_images/1242864145935945728/nRlrQx_-_normal.jpg',
+	profile_image: 'https://s3.amazonaws.com/keybase_processed_uploads/46700a68eaffa176d87f386d66eb2405_360_360.jpg',
 };
 
 (async () => {
