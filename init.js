@@ -71,12 +71,12 @@ const user = {
 	const publicKeys = (await openpgp.key.readArmored(pubKey)).keys;
 
 	async function initInner() {
-		const hash = location.hash;
-		if (!hash) {
+		const payload = location.search || location.hash;
+		if (!payload) {
 			throw '本文が指定されていません。';
 		}
 
-		cleartext = decodeURIComponent(hash.slice(1));
+		cleartext = decodeURIComponent(payload.slice(1));
 		const armorRe = /^(?:.*\n)?(-----BEGIN PGP SIGNED MESSAGE-----\s*\n(?:Hash:\s+[^\n]*\n)?(?:\s*\n)*)\n[^]*\n(-----BEGIN PGP SIGNATURE-----\s*\n[^]*-----END PGP SIGNATURE-----\s*)(\n.*)?$/;
 		const [, head, signature] = cleartext.match(armorRe);
 
@@ -154,6 +154,18 @@ const user = {
 		reset();
 		init();
 	});
+
+	// Check whether the page is embedded inside an `<iframe>`.
+	// Original code: <https://stackoverflow.com/a/326076>.
+	let embedded;
+	try {
+		embedded = window !== window.top;
+	} catch (e) {
+		embedded = true;
+	}
+	if (embedded) {
+		document.body.classList.add('full');
+	}
 
 	await init();
 })();
