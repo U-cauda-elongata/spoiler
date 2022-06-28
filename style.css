@@ -5,12 +5,12 @@
     --background-color: #FFF;
     --color: #000;
     --scroll-box-background-color: #DDD;
-    --box-border-color: #E6ECF0;
+    --section-border-color: #E6ECF0;
     --screenname-color: #657786;
     --complementary-color: #BBB;
     --mask-color: #AFA;
     --footer-color: #777;
-    --box-padding: 13px;
+    --section-padding: 13px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,12 +18,19 @@
         --background-color: #000;
         --color: #FFF;
         --scroll-box-background-color: #222;
-        --box-border-color: #2F3336;
+        --section-border-color: #2F3336;
         --screenname-color: #6E767D;
         --complementary-color: #444;
         --mask-color: #050;
         --footer-color: #888;
     }
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: initial;
+    min-height: 100vh;
 }
 
 :any-link {
@@ -43,33 +50,32 @@ p {
     margin-bottom: 8px;
 }
 
-.box {
-    margin: auto;
-    margin-bottom: var(--box-padding);
-    width: 600px;
-    max-width: 90%;
-    min-width: 400px;
-    border: solid 1px var(--box-border-color);
-    padding: var(--box-padding);
+.section {
+    box-sizing: border-box;
+    border: solid 1px var(--section-border-color);
+    border-left: none;
+    border-right: none;
+    padding: var(--section-padding);
+    width: 100vw;
 }
 
-.box > p:first-child {
+.section > p:first-child {
     margin-top: auto;
 }
 
-.box > p:last-child {
+.section > p:last-child {
     margin-bottom: auto;
 }
 
-.box > h1:first-child {
+.section > h1:first-child {
     margin-top: auto;
 }
 
-.box hr {
-    margin: var(--box-padding) 0 var(--box-padding) calc(-1 * var(--box-padding));
-    width: calc(100% + 2 * var(--box-padding));
+.section hr {
+    margin: var(--section-padding) 0 var(--section-padding) calc(-1 * var(--section-padding));
+    width: calc(100% + 2 * var(--section-padding));
     border: none;
-    border-top: solid 1px var(--box-border-color);
+    border-top: solid 1px var(--section-border-color);
 }
 
 .post header::after {
@@ -144,7 +150,7 @@ summary > * {
     max-height: 200px;
     overflow-y: scroll;
     background-color: var(--scroll-box-background-color);
-    padding: 0 var(--box-padding);
+    padding: 0 var(--section-padding);
 }
 
 .public-key {
@@ -152,11 +158,14 @@ summary > * {
 }
 
 .footer {
-    border-top: solid 1px var(--box-border-color);
-    margin-top: calc(2 * var(--box-padding));
-    padding-top: var(--box-padding);
+    border-top: solid 1px var(--section-border-color);
+    padding-top: var(--section-padding);
     display: block;
     text-align: center;
+}
+
+.flex-spacing {
+    flex-grow: 1;
 }
 
 .footer, .footer a {
@@ -168,4 +177,12 @@ summary > * {
     fill: currentColor;
     width: 30px;
     height: 30px;
+}
+
+@media (min-width: 600px) {
+    .section {
+        margin: var(--section-padding) auto 0 auto;
+        border: solid 1px var(--section-border-color);
+        width: 600px;
+    }
 }

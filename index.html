@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>オナガグマのスポイラー</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/openpgp/4.10.8/lightweight/openpgp.min.js" defer=""></script>
 	<script src="init.js" defer=""></script>
 	<link href="style.css" rel="stylesheet" />
@@ -23,7 +24,7 @@
 </head>
 <body>
 	<main>
-		<article class="box post noscript-cloak" aria-live="polite" aria-atomic="true" aria-busy="true">
+		<article class="section post noscript-cloak" aria-live="polite" aria-atomic="true" aria-busy="true">
 			<header>
 				<a class="author-link" rel="author external me">
 					<img alt="" class="profile-image" width="43" height="43" src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20style=%22background-color:%23AAA%22%3E%3C/svg%3E" />
@@ -40,22 +41,22 @@
 			</div>
 			<button class="button armor-copy-button">Copy</button>
 		</article>
-		<section class="box error-container" role="alert" hidden="">
+		<section class="section error-container" role="alert" hidden="">
 			<h1>エラー</h1>
 			<p class="error"></p>
 		</section>
 		<noscript>
-			<section class="box">
+			<section class="section">
 				<p>このページの内容を表示するには JavaScript を有効にする必要があります。</p>
 				<p>どうしても JavaScript を有効にできない（したくない）場合は、このページの URI のフラグメント部分をを取り出すことで本文を読むことができます。ただし、その場合は次の節に従って署名を検証することを推奨します。</p>
 			</section>
 		</noscript>
 	</main>
-	<section class="box">
+	<section class="section">
 		<details>
 			<summary><h1>検証（OpenPGP の扱い方が分かる方向けの補足）</h1></summary>
 			<p>このページの内容は URI のフラグメント部分を元に表示されています。フラグメント文字列がこのページの所有者による発言であることを確かめるために、その内容は以下に示す PGP 公開鍵による検証を経ています。</p>
-			<p>フィンガープリント: <a class="fingerprint" href="https://keybase.io/u_cauda_elongata/pgp_keys.asc?fingerprint=c8596a4d28f13173d9a3619a83fbddc18b392fa7" rel="external"><span>C859</span><span>6A4D</span><span>28F1</span><span>3173</span><span>D9A3</span><span>619A</span><span>83FB</span><span>DDC1</span><span>8B39</span><span>2FA7</span></a></p>
+			<p>フィンガープリント: <a class="fingerprint" href="https://keybase.io/u_cauda_elongata/pgp_keys.asc?fingerprint=c8596a4d28f13173d9a3619a83fbddc18b392fa7" rel="external"><span>C859</span><wbr /><span>6A4D</span><wbr /><span>28F1</span><wbr /><span>3173</span><wbr /><span>D9A3</span><wbr /><span>619A</span><wbr /><span>83FB</span><wbr /><span>DDC1</span><wbr /><span>8B39</span><wbr /><span>2FA7</span></a></p>
 			<div class="scroll-box">
 				<pre><code class="public-key">-----BEGIN PGP PUBLIC KEY BLOCK-----
 
@@ -385,6 +386,7 @@ gB4JV9hmSQdyPDLPxQ==
 			<p>上記の公開鍵がリンク先の Twitter アカウントのものであることを確認するために <a href="https://keybase.io/u_cauda_elongata">Keybase</a> からリンクされた証明が利用できます。</p>
 		</details>
 	</section>
+	<div class="flex-spacing"></div>
 	<footer class="footer">
 		<a href="https://github.com/U-cauda-elongata/spoiler" rel="external"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" aria-label="GitHub" role="img"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-.609.109-.828-.266-.828-.578 0-.391.016-1.687.016-3.297 0-1.125-.375-1.844-.812-2.219 2.672-.297 5.484-1.313 5.484-5.922 0-1.313-.469-2.375-1.234-3.219.125-.313.531-1.531-.125-3.187-1-.313-3.297 1.234-3.297 1.234a11.28 11.28 0 00-6 0S6.704 6.656 5.704 6.969c-.656 1.656-.25 2.875-.125 3.187-.766.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-.344.313-.656.844-.766 1.609-.688.313-2.438.844-3.484-1-.656-1.141-1.844-1.234-1.844-1.234-1.172-.016-.078.734-.078.734.781.359 1.328 1.75 1.328 1.75.703 2.141 4.047 1.422 4.047 1.422 0 1 .016 1.937.016 2.234 0 .313-.219.688-.828.578C3.439 23.796.002 19.296.002 13.999c0-6.625 5.375-12 12-12zM4.547 19.234c.031-.063-.016-.141-.109-.187-.094-.031-.172-.016-.203.031-.031.063.016.141.109.187.078.047.172.031.203-.031zm.484.532c.063-.047.047-.156-.031-.25-.078-.078-.187-.109-.25-.047-.063.047-.047.156.031.25.078.078.187.109.25.047zm.469.703c.078-.063.078-.187 0-.297-.063-.109-.187-.156-.266-.094-.078.047-.078.172 0 .281s.203.156.266.109zm.656.656c.063-.063.031-.203-.063-.297-.109-.109-.25-.125-.313-.047-.078.063-.047.203.063.297.109.109.25.125.313.047zm.891.391c.031-.094-.063-.203-.203-.25-.125-.031-.266.016-.297.109s.063.203.203.234c.125.047.266 0 .297-.094zm.984.078c0-.109-.125-.187-.266-.172-.141 0-.25.078-.25.172 0 .109.109.187.266.172.141 0 .25-.078.25-.172zm.906-.156c-.016-.094-.141-.156-.281-.141-.141.031-.234.125-.219.234.016.094.141.156.281.125s.234-.125.219-.219z"></path></svg></a>
 	</footer>
