@@ -139,10 +139,6 @@ summary > * {
     font-size: small;
 }
 
-.button {
-    font-size: large;
-}
-
 .footer {
     border-top: solid 1px var(--box-border-color);
     margin-top: 26px;
