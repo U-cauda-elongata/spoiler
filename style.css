@@ -10,7 +10,9 @@
     --complementary-color: #BBB;
     --mask-color: #AFA;
     --footer-color: #777;
+    --box-padding: 13px;
 }
+
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: #000;
@@ -23,15 +25,19 @@
         --footer-color: #888;
     }
 }
+
 :any-link {
     color: #17BF63;
 }
+
 code {
     font-family: 'Source Code Pro', 'Menlo', 'Monaco', 'Courier New', monospace;
 }
+
 h1 {
     font-size: large;
 }
+
 p {
     margin-top: 8px;
     margin-bottom: 8px;
@@ -39,27 +45,29 @@ p {
 
 .box {
     margin: auto;
-    margin-bottom: 13px;
+    margin-bottom: var(--box-padding);
     width: 600px;
     max-width: 90%;
     min-width: 400px;
     border: solid 1px var(--box-border-color);
-    padding: 13px;
+    padding: var(--box-padding);
 }
+
 .box > p:first-child {
     margin-top: auto;
 }
+
 .box > p:last-child {
     margin-bottom: auto;
 }
+
 .box > h1:first-child {
     margin-top: auto;
 }
+
 .box hr {
-    margin-top: 13px;
-    margin-bottom: 13px;
-    margin-left: -13px;
-    width: calc(100% + 26px);
+    margin: var(--box-padding) 0 var(--box-padding) calc(-1 * var(--box-padding));
+    width: calc(100% + 2 * var(--box-padding));
     border: none;
     border-top: solid 1px var(--box-border-color);
 }
@@ -69,9 +77,11 @@ p {
     display: block;
     clear: both;
 }
+
 .post header .profile-image {
     float: left;
 }
+
 .post header .timestamp {
     float: right;
 }
@@ -80,15 +90,18 @@ p {
     color: var(--color);
     text-decoration: none;
 }
+
 .profile-image {
     width: 43px;
     height: 43px;
     border-radius: 50%;
     margin-right: 10px;
 }
+
 .name {
     font-weight: bold;
 }
+
 .screenname {
     color: var(--screenname-color);
 }
@@ -97,12 +110,15 @@ p {
     font-size: x-small;
     display: inline;
 }
+
 .armor aside, .bracket {
     color: var(--complementary-color);
 }
+
 .armor-text {
     white-space: pre-wrap;
 }
+
 .mask {
     background: var(--mask-color);
 }
@@ -120,19 +136,15 @@ summary > * {
     margin-left: 20px;
 }
 
-.fingerprint span:first-child {
-    padding-left: 0;
-}
-.fingerprint span {
+.fingerprint span:not(:first-child) {
     padding-left: 5px;
 }
 
 .scroll-box {
-    height: 200px;
-    overflow: auto;
+    max-height: 200px;
+    overflow-y: scroll;
     background-color: var(--scroll-box-background-color);
-    padding-left: 13px;
-    padding-right: 13px;
+    padding: 0 var(--box-padding);
 }
 
 .public-key {
@@ -141,8 +153,8 @@ summary > * {
 
 .footer {
     border-top: solid 1px var(--box-border-color);
-    margin-top: 26px;
-    padding-top: 13px;
+    margin-top: calc(2 * var(--box-padding));
+    padding-top: var(--box-padding);
     display: block;
     text-align: center;
 }
