@@ -127,6 +127,19 @@ p {
     background: var(--mask-color);
 }
 
+summary {
+    display: block;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary > * {
+    display: list-item;
+    margin-left: 20px;
+}
+
 .fingerprint span:first-child {
     padding-left: 0;
 }
