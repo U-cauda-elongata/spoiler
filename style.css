@@ -38,19 +38,13 @@ p {
 }
 
 .box {
-    margin: 13px auto;
+    margin: auto;
+    margin-bottom: 13px;
     width: 600px;
     max-width: 90%;
     min-width: 400px;
     border: solid 1px var(--box-border-color);
     padding: 13px;
-}
-.full main .box {
-    margin: auto;
-    width: 100%;
-    min-width: unset;
-    max-width: calc(100% - 26px);
-    height: calc(100vh - 44px);
 }
 .box > p:first-child {
     margin-top: auto;
@@ -81,9 +75,6 @@ p {
 .post header .timestamp {
     float: right;
 }
-.full .timestamp {
-    display: none;
-}
 
 .author-link {
     color: var(--color);
@@ -102,10 +93,6 @@ p {
     color: var(--screenname-color);
 }
 
-.full .search-link {
-    display: none;
-}
-
 .armor aside {
     font-size: x-small;
     display: inline;
@@ -113,15 +100,8 @@ p {
 .armor aside, .bracket {
     color: var(--complementary-color);
 }
-.full .armor {
-    margin: 8px auto;
-}
-.full .armor aside {
-    display: none;
-}
 .armor-text {
     white-space: pre-wrap;
-    word-break: break-all;
 }
 .mask {
     background: var(--mask-color);
@@ -161,13 +141,6 @@ summary > * {
 
 .button {
     font-size: large;
-}
-.full .button {
-    display: none;
-}
-
-.full main ~ * {
-    display: none;
 }
 
 .footer {
