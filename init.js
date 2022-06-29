@@ -67,8 +67,8 @@ const user = {
 		// noop
 	}
 
-	const armoredKeys = document.getElementsByClassName('public-key')[0].innerHTML;
-	const publicKeys = (await openpgp.readKey({ armoredKeys }));
+	const armoredKey = document.getElementsByClassName('public-key')[0].innerHTML;
+	const publicKey = (await openpgp.readKey({ armoredKey }));
 
 	async function initInner() {
 		const hash = location.hash;
@@ -85,8 +85,7 @@ const user = {
 		let verified;
 		try {
 			created = message.signature.packets[0].created;
-			const results = (await message.verify(publicKeys)).map(({ verified }) => verified);
-			verified = (await Promise.all(results)).every(x => x);
+			verified = await (await message.verify([publicKey]))[0].verified;
 		} catch (e) {
 			console.log(e);
 			verified = false;
