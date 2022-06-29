@@ -15,10 +15,10 @@ const user = {
 		});
 	}]);
 
-	let cleartext;
+	let cleartextMessage;
 	document.getElementsByClassName('armor-copy-button')[0].addEventListener('click', () => {
-		if (cleartext) {
-			navigator.clipboard.writeText(cleartext);
+		if (cleartextMessage) {
+			navigator.clipboard.writeText(cleartextMessage);
 		}
 	});
 
@@ -67,8 +67,8 @@ const user = {
 		// noop
 	}
 
-	const pubKey = document.getElementsByClassName('public-key')[0].innerHTML;
-	const publicKeys = (await openpgp.key.readArmored(pubKey)).keys;
+	const armoredKeys = document.getElementsByClassName('public-key')[0].innerHTML;
+	const publicKeys = (await openpgp.readKey({ armoredKeys }));
 
 	async function initInner() {
 		const hash = location.hash;
@@ -76,11 +76,11 @@ const user = {
 			throw '本文が指定されていません。';
 		}
 
-		cleartext = decodeURIComponent(hash.slice(1));
+		cleartextMessage = decodeURIComponent(hash.slice(1));
 		const armorRe = /^(?:.*\n)?(-----BEGIN PGP SIGNED MESSAGE-----\s*\n(?:Hash:\s+[^\n]*\n)?(?:\s*\n)*)\n[^]*\n(-----BEGIN PGP SIGNATURE-----\s*\n[^]*-----END PGP SIGNATURE-----\s*)(\n.*)?$/;
-		const [, head, signature] = cleartext.match(armorRe);
+		const [, head, signature] = cleartextMessage.match(armorRe);
 
-		const message = await openpgp.cleartext.readArmored(cleartext);
+		const message = await openpgp.readCleartextMessage({ cleartextMessage });
 		let created;
 		let verified;
 		try {
@@ -137,7 +137,7 @@ const user = {
 	function init() {
 		return initInner()
 			.catch(e => {
-				cleartext = null;
+				cleartextMessage = null;
 				errorMessage.innerText = e;
 				main.toggleAttribute('hidden', true);
 				errorContainer.toggleAttribute('hidden', false);

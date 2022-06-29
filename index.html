@@ -4,7 +4,10 @@
 	<meta charset="utf-8" />
 	<title>オナガグマのスポイラー</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/openpgp/4.10.8/lightweight/openpgp.min.js" defer=""></script>
+        <script type="module">
+            import * as openpgp from './openpgp.min.js';
+            window.openpgp = openpgp;
+        </script>
 	<script src="init.js" defer=""></script>
 	<link href="style.css" rel="stylesheet" />
 	<meta property="og:title" name="twitter:title" content="オナガグマのスポイラー" />
